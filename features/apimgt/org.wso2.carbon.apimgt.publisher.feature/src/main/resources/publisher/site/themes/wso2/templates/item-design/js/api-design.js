@@ -659,6 +659,10 @@ APIDesigner.prototype.render_resource = function(container){
             gutters: ["CodeMirror-lint-markers"],
             lint: true
         });
+
+        editor.on('change',function(cMirror){
+            operation[0]["x-mediation-script"] = cMirror.getValue();
+        });
     }
 
     container.find('.notes').editable({
@@ -719,7 +723,7 @@ APIDesigner.prototype.render_resource = function(container){
 };
 
 APIDesigner.prototype.query = function(path){
-    return jsonPath(this.api_doc,path);
+    return JSONPath(path, this.api_doc);
 }
 
 APIDesigner.prototype.add_resource = function(resource, path){    
